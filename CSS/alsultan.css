@@ -9,6 +9,7 @@
     --main-color-alt: #1787e0;
     --main-transition: 0.3s;
     --section-padding: 100px;
+    --section-background: #ECECEC;
 }
 html {
     scroll-behavior: smooth;
@@ -250,7 +251,7 @@ ul {
     top: -60px;
     width: 100%;
     height: 100%;
-    background-color: #ECECEC;
+    background-color: var(--section-background);
     z-index: -1;
     transform: skewY(-6deg);
     transform-origin: top left;
@@ -378,28 +379,173 @@ ul {
 .gallery {
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
-    background-color: #ECECEC;
+    background-color: var(--section-background);
 }
 .gallery .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 40px;
 }
-.gallery .image {
-    border: 15px solid white;
-    box-shadow: 0 2px 15px rgb(0 0 0 / 20%);
-    width: fit-content;
+.gallery .box {
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0px 12px 20px 0px rgb(0 0 0 / 13%), 0px 2px 4px 0px rgb(0 0 0 / 12%);
+}
+.gallery .box .image {
+    position: relative;
     overflow: hidden;
 }
-.gallery .image img {
-    width: 300px;
+.gallery .box .image::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255, 0.2);
+    width: 0;
+    height: 0;
+    opacity: 0;
+    z-index: 2;
+}
+.gallery .box .image:hover::before {
+    animation: flashing 0.7s;
+} 
+.gallery .box .image img {
+    max-width: 100%;
     transition: var(--main-transition);
 }
-.gallery .image:hover img {
-    transform: scale(1.2, 1.2) rotate(6deg);
-    position: relative;
+.gallery .box .image:hover img {
+    transform: scale(1.2) rotate(6deg);
 }
 /* End Gallery */
+/* Start Features */
+.features {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+.features .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+.features .box {
+    border: 1px solid #ddd;
+}
+.features .box .image img {
+    max-width: 100%;
+    position: relative;
+}
+.features .box .image {
+    position: relative;
+    overflow: hidden;
+}
+.features .box.quality .image::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.features .box.time .image::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 255, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.features .box.passion .image::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 255, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.features .box .info {
+    text-align: center;
+}
+.features .box .info h2 {
+    font-size: 40px;
+    position: relative;
+}
+.features .box.quality .info h2::before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    background-color: red;
+    top: 60px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 28%;
+}
+.features .box.time .info h2::before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    background-color: green;
+    top: 60px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 15%;
+}
+.features .box.passion .info h2::before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    background-color: blue;
+    top: 60px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 30%;
+}
+.features .box .link-quality a {
+    text-align: center;
+    display: block;
+    margin: 30px auto;
+    color: red;
+    border: 3px solid red;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.features .box .link-time a {
+    text-align: center;
+    display: block;
+    margin: 30px auto;
+    color: green;
+    border: 3px solid green;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.features .box .link-passion a {
+    text-align: center;
+    display: block;
+    margin: 30px auto;
+    color: blue;
+    border: 3px solid blue;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.features .box .info p {
+    color: #777;
+    line-height: 1.7;
+    width: 300px;
+    margin: 0 auto;
+}
+/* End Features */
 /* Start Animation */
 @keyframes up-and-down {
     0%,
@@ -455,9 +601,14 @@ ul {
         transform: translateX(10px);
     }
 }
-@keyframes fill-img{
-    {
-
+@keyframes flashing {
+    0%, 40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        width: 200%;
+        height: 200%;
     }
 }
 /* End Animation */
